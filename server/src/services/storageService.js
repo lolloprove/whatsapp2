@@ -1,7 +1,12 @@
 import { jsonStore } from './jsonStore.js';
+import { ensureSystemContacts, ensureLisiChatForUser, isReservedUsername } from './systemContacts.js';
 
 // Socket tracking (volontariamente solo in-memory: la presenza è effimera)
 const userSockets = new Map(); // userId -> Set of socketIds
+
+// I contatti di sistema (Onorevole Lisi) esistono da subito, prima di
+// qualsiasi registrazione, così username riservato e avatar sono attivi.
+ensureSystemContacts();
 
 const USERNAME_REGEX = /^[a-z0-9_]{2,30}$/;
 
@@ -21,7 +26,8 @@ function toPublicUser(u) {
     statusMessage: u.statusMessage,
     isOnline: userSockets.has(u.id) && userSockets.get(u.id).size > 0,
     lastSeen: u.lastSeen,
-    createdAt: u.createdAt
+    createdAt: u.createdAt,
+    isSystem: u.isSystem === true
   };
 }
 
@@ -44,9 +50,18 @@ export const storageService = {
       throw err;
     }
 
+    // Username riservati ai contatti di sistema: mai registrabili,
+    // mai restituiti come login implicito.
+    if (isReservedUsername(cleanUsername)) {
+      const err = new Error('Questo username non è disponibile.');
+      err.statusCode = 400;
+      throw err;
+    }
+
     const existing = jsonStore.state.users.find((u) => u.username === cleanUsername);
     if (existing) {
       existing.lastSeen = new Date().toISOString();
+      ensureLisiChatForUser(existing.id);
       mutate();
       return { user: existing, created: false };
     }
@@ -62,6 +77,7 @@ export const storageService = {
       createdAt: nowIso
     };
     jsonStore.state.users.push(newUser);
+    ensureLisiChatForUser(newUser.id);
     mutate();
     return { user: newUser, created: true };
   },
@@ -78,11 +94,11 @@ export const storageService = {
 
     if (!existing) return null;
 
-    // Se lo username cambia, deve restare univoco
+    // Se lo username cambia, deve restare univoco e mai riservato
     let nextUsername = existing.username;
     if (userData.username) {
       const candidate = normalizeUsername(userData.username);
-      if (USERNAME_REGEX.test(candidate)) {
+      if (USERNAME_REGEX.test(candidate) && !isReservedUsername(candidate)) {
         const clash = jsonStore.state.users.find((u) => u.username === candidate && u.id !== cleanId);
         if (!clash) nextUsername = candidate;
       }
@@ -107,7 +123,8 @@ export const storageService = {
 
   async searchUsers(query = '', excludeUserId = null) {
     const q = String(query || '').toLowerCase().trim();
-    let all = jsonStore.state.users.filter((u) => u.id !== excludeUserId);
+    // I contatti di sistema (Lisi) non compaiono mai nella ricerca
+    let all = jsonStore.state.users.filter((u) => u.id !== excludeUserId && !u.isSystem);
     if (q) {
       all = all.filter(
         (u) =>
@@ -151,6 +168,10 @@ export const storageService = {
   },
 
   async getUserConversations(userId) {
+    // Lazy seed: utenti già esistenti ricevono la chat con Lisi
+    // al primo fetch conversazioni, una sola volta.
+    ensureLisiChatForUser(userId);
+
     const list = [];
     for (const conv of jsonStore.state.conversations) {
       if (!conv.participants.includes(userId)) continue;

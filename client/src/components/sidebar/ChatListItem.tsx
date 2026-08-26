@@ -3,7 +3,7 @@ import type { ConversationSummary } from '../../types/chat';
 import { Avatar } from '../common/Avatar';
 import { Badge } from '../common/Badge';
 import { formatChatListTime } from '../../utils/dateUtils';
-import { Check, CheckCheck } from 'lucide-react';
+import { Check, CheckCheck, Star } from 'lucide-react';
 
 interface ChatListItemProps {
   conversation: ConversationSummary;
@@ -30,6 +30,7 @@ export const ChatListItem: React.FC<ChatListItemProps> = ({
   const isMeSender = lastMsg?.senderId === currentUserId;
   const lastContent = lastMsg?.translatedContent || lastMsg?.originalContent || '';
   const hasUnread = conversation.unreadCount > 0;
+  const isSystemContact = other.isSystem === true;
 
   return (
     <div
@@ -51,13 +52,27 @@ export const ChatListItem: React.FC<ChatListItemProps> = ({
         if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
       }}
     >
-      <Avatar
-        src={other.avatarUrl}
-        name={other.fullName}
-        size="md"
-        isOnline={other.isOnline}
-        showStatus
-      />
+      {/* Anello dorato discreto per il contatto di sistema */}
+      <div
+        style={
+          isSystemContact
+            ? {
+                display: 'inline-flex',
+                borderRadius: '50%',
+                boxShadow: '0 0 0 2px var(--brand-gold), 0 0 10px rgba(212, 175, 55, 0.28)',
+                flexShrink: 0
+              }
+            : { display: 'inline-flex', flexShrink: 0 }
+        }
+      >
+        <Avatar
+          src={other.avatarUrl}
+          name={other.fullName}
+          size="md"
+          isOnline={other.isOnline}
+          showStatus
+        />
+      </div>
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div
@@ -76,10 +91,23 @@ export const ChatListItem: React.FC<ChatListItemProps> = ({
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              letterSpacing: '-0.2px'
+              letterSpacing: '-0.2px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              minWidth: 0
             }}
           >
-            {other.fullName}
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{other.fullName}</span>
+            {isSystemContact && (
+              <Star
+                size={13}
+                fill="var(--brand-gold)"
+                color="var(--brand-gold)"
+                style={{ flexShrink: 0 }}
+                aria-label="Contatto ufficiale"
+              />
+            )}
           </span>
           {lastMsg && (
             <span

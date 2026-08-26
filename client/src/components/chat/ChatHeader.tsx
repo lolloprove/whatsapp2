@@ -3,7 +3,7 @@ import type { UserProfile } from '../../types/chat';
 import { Avatar } from '../common/Avatar';
 import { useChat } from '../../context/ChatContext';
 import { BottomSheet } from '../common/BottomSheet';
-import { ArrowLeft, MoreVertical } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Star } from 'lucide-react';
 
 interface ChatHeaderProps {
   otherUser?: UserProfile;
@@ -21,6 +21,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ otherUser, onBackMobile 
     avatarUrl: '',
     isOnline: false
   };
+  const isSystemContact = otherUser?.isSystem === true;
 
   return (
     <>
@@ -64,13 +65,26 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ otherUser, onBackMobile 
             </button>
           )}
 
-          <Avatar
-            src={user.avatarUrl}
-            name={user.fullName}
-            size="sm"
-            isOnline={user.isOnline}
-            showStatus
-          />
+          <div
+            style={
+              isSystemContact
+                ? {
+                    display: 'inline-flex',
+                    borderRadius: '50%',
+                    boxShadow: '0 0 0 2px var(--brand-gold), 0 0 10px rgba(212, 175, 55, 0.28)',
+                    flexShrink: 0
+                  }
+                : { display: 'inline-flex', flexShrink: 0 }
+            }
+          >
+            <Avatar
+              src={user.avatarUrl}
+              name={user.fullName}
+              size="sm"
+              isOnline={user.isOnline}
+              showStatus
+            />
+          </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, marginLeft: '4px' }}>
             <span
@@ -82,10 +96,22 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ otherUser, onBackMobile 
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 lineHeight: '1.2',
-                letterSpacing: '-0.2px'
+                letterSpacing: '-0.2px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
               }}
             >
               {user.fullName}
+              {isSystemContact && (
+                <Star
+                  size={12}
+                  fill="var(--brand-gold)"
+                  color="var(--brand-gold)"
+                  style={{ flexShrink: 0 }}
+                  aria-label="Contatto ufficiale"
+                />
+              )}
             </span>
             <span
               style={{

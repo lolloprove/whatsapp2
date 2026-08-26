@@ -30,6 +30,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ onSelectChatMobile }) => {
     return true;
   });
 
+  // Il contatto di sistema (Onorevole Lisi) resta sempre in cima alla lista
+  const orderedConversations = [...filteredConversations].sort((a, b) => {
+    const aSys = a.otherParticipant?.isSystem ? 1 : 0;
+    const bSys = b.otherParticipant?.isSystem ? 1 : 0;
+    if (aSys !== bSys) return bSys - aSys;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+
   const pillStyle = (active: boolean): React.CSSProperties => ({
     padding: '6px 16px',
     borderRadius: 'var(--radius-full)',
@@ -171,7 +179,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onSelectChatMobile }) => {
           paddingBottom: '88px'
         }}
       >
-        {filteredConversations.length === 0 ? (
+        {orderedConversations.length === 0 ? (
           <div
             style={{
               padding: '64px 28px',
@@ -205,7 +213,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onSelectChatMobile }) => {
             </p>
           </div>
         ) : (
-          filteredConversations.map((conv) => (
+          orderedConversations.map((conv) => (
             <ChatListItem
               key={conv.id}
               conversation={conv}

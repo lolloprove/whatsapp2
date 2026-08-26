@@ -7,6 +7,7 @@ export interface UserProfile {
   isOnline: boolean;
   lastSeen?: string;
   createdAt?: string;
+  isSystem?: boolean;
 }
 
 export interface LanguageMeta {
