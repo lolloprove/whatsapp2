@@ -1,3 +1,6 @@
+# Render Blueprint — riflette i servizi attualmente deployati.
+# NOTA: i servizi live sono stati creati via Render MCP/API con gli stessi
+# parametri; gli URL effettivi includono il suffisso assegnato da Render.
 services:
   # Backend Web Service (Node.js + Express + Socket.io)
   - type: web
@@ -10,10 +13,14 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: CORS_ORIGIN
+        value: https://whatsapp2-frontend-0pdh.onrender.com
       # Render assegna PORT automaticamente; il server legge process.env.PORT
+      # Persistenza: JsonStore su filesystem effimero (free tier, no disk).
+      # Con un disco persistente montato in /var/data: aggiungere DATA_DIR=/var/data
 
   # Frontend Static Site (React + Vite)
-  # NOTA: VITE_* vengono iniettate a build-time da Vite.
+  # VITE_* vengono iniettate a build-time da Vite.
   - type: web
     name: whatsapp2-frontend
     env: static
@@ -22,9 +29,9 @@ services:
     staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: https://whatsapp2-backend.onrender.com/api/v1
+        value: https://whatsapp2-backend-tz1e.onrender.com/api/v1
       - key: VITE_SOCKET_URL
-        value: https://whatsapp2-backend.onrender.com
+        value: https://whatsapp2-backend-tz1e.onrender.com
     routes:
       - type: rewrite
         source: /*

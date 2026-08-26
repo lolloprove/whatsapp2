@@ -89,6 +89,9 @@ export function translateWithFallback(text, targetLangCode) {
   const cleanText = String(text).trim();
   const code = (targetLangCode || '').toLowerCase().trim();
 
+  // Nessun wrapper/emoji/etichetta: il testo restituito deve sembrare
+  // un messaggio normale, senza indicatori del motore di traduzione.
+
   // 1. Pirate English
   if (code === 'pirate') {
     const words = cleanText.split(/\s+/);
@@ -98,16 +101,16 @@ export function translateWithFallback(text, targetLangCode) {
         return PIRATE_DICTIONARY[cleanW] || w;
       })
       .join(' ');
-    return `🏴‍☠️ "Ahoy! ${translated}, by Blackbeard's ghost!"`;
+    return translated;
   }
 
-  // 2. Yoda-Speak
+  // 2. Yoda-Speak (inversione delle clausole)
   if (code === 'yoda') {
     const parts = cleanText.split(/[,.!?]/).filter(Boolean);
     if (parts.length > 1) {
-      return `🌌 "${parts.reverse().map((s) => s.trim()).join(', ')}... hmmm, yes. The Force is with this."`;
+      return parts.reverse().map((s) => s.trim()).join(', ');
     }
-    return `🌌 "${cleanText}, you say? Strong in wisdom, this message is."`;
+    return cleanText;
   }
 
   // 3. Napoletano
@@ -119,24 +122,24 @@ export function translateWithFallback(text, targetLangCode) {
         return NAPOLETANO_DICTIONARY[cleanW] || w;
       })
       .join(' ');
-    return `🍕 "${translated}! Uè, statte bbuono!"`;
+    return translated;
   }
 
   // 4. Klingon
   if (code === 'klingon') {
-    return `🛸 "tlhIngan Hol: Qapla'! [${cleanText.toUpperCase()}] nuqneH!"`;
+    return `Qapla'! ${cleanText.toUpperCase()} nuqneH!`;
   }
 
   // 5. Sindarin Elvish
   if (code === 'elvish') {
-    return `🧝 "Elen síla lúmenn' omentielvo: ${cleanText}ndoriel vanimelda."`;
+    return `Elen síla lúmenn' omentielvo: ${cleanText}ndoriel vanimelda`;
   }
 
   // 6. Classical Latin
   if (code === 'la') {
     const prefix = LATIN_PREFIXES[Math.floor(Math.random() * LATIN_PREFIXES.length)];
     const suffix = LATIN_SUFFIXES[Math.floor(Math.random() * LATIN_SUFFIXES.length)];
-    return `🏛️ "${prefix}${cleanText}${suffix}"`;
+    return `${prefix}${cleanText}${suffix}`;
   }
 
   // 7. Esperanto
@@ -148,7 +151,7 @@ export function translateWithFallback(text, targetLangCode) {
         return ESPERANTO_DICTIONARY[cleanW] || w;
       })
       .join(' ');
-    return `🌐 "${translated} (Bona tago el la tuta mondo)"`;
+    return translated;
   }
 
   // 8. Generic Script & Babel Transform (Japanese, Russian, Greek, Arabic, etc.)
@@ -174,6 +177,7 @@ function mockBabelTransform(text, langCode) {
     return transformed;
   }
 
-  // Se non c'è mappa caratteri specifica, restituisci traduzione poetica babelica
-  return `✨ [${langCode.toUpperCase()}] ${text} ~ babelium`;
+  // Se non c'è mappa caratteri specifica, restituisci il testo originale
+  // (fallback onesto: niente marker che rivelano il motore automatico)
+  return text;
 }

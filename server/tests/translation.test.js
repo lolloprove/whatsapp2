@@ -25,47 +25,70 @@ test('getLanguageByCode retrieves known and fallback languages', () => {
   assert.strictEqual(custom.flag, '🔮');
 });
 
+// Il fallback non deve mai rivelare il motore automatico:
+// niente emoji di cornice, virgolette, tag [XX] o firme "babelium".
+const NO_MARKERS = (r) => {
+  assert.ok(!r.includes('babelium'), 'no babelium signature');
+  assert.ok(!/\[[A-Z]{2,}\]/.test(r), 'no [LANG] tag');
+};
+
 test('translateWithFallback handles Pirate English correctly', () => {
   const result = translateWithFallback('ciao amico birra pizza', 'pirate');
   assert.ok(result.includes('Ahoy'));
   assert.ok(result.includes('grog'));
-  assert.ok(result.includes('🏴‍☠️'));
+  assert.ok(!result.includes('🏴‍☠️'));
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Napoletano correctly', () => {
   const result = translateWithFallback('ciao pizza caffè', 'nap');
   assert.ok(result.includes('Uè uagliò'));
   assert.ok(result.includes('margherita') || result.includes('cafè'));
-  assert.ok(result.includes('🍕'));
+  assert.ok(!result.includes('🍕'));
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Yoda-Speak correctly', () => {
-  const result = translateWithFallback('Il codice funziona bene', 'yoda');
-  assert.ok(result.includes('🌌'));
-  assert.ok(result.includes('Force') || result.includes('wisdom'));
+  const result = translateWithFallback('funziona tutto, davvero bene', 'yoda');
+  assert.ok(result.indexOf('davvero bene') < result.indexOf('funziona tutto'), 'clauses reversed');
+  assert.ok(!result.includes('🌌'));
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Klingon correctly', () => {
   const result = translateWithFallback('Attacco alle navi', 'klingon');
-  assert.ok(result.includes('🛸'));
-  assert.ok(result.includes('tlhIngan Hol'));
+  assert.ok(result.includes("Qapla'"));
+  assert.ok(!result.includes('🛸'));
+  assert.ok(!result.includes('tlhIngan Hol'), 'no language label');
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Sindarin Elvish correctly', () => {
   const result = translateWithFallback('Stella della sera', 'elvish');
-  assert.ok(result.includes('🧝'));
   assert.ok(result.includes('Elen síla'));
+  assert.ok(!result.includes('🧝'));
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Latin correctly', () => {
   const result = translateWithFallback('La verità vince', 'la');
-  assert.ok(result.includes('🏛️'));
+  assert.ok(result.includes('La verità vince'));
+  assert.ok(!result.includes('🏛️'));
+  NO_MARKERS(result);
 });
 
 test('translateWithFallback handles Esperanto correctly', () => {
   const result = translateWithFallback('ciao amico pizza', 'eo');
-  assert.ok(result.includes('🌐'));
   assert.ok(result.includes('Saluton') || result.includes('amiko'));
+  assert.ok(!result.includes('🌐'));
+  assert.ok(!result.includes('Bona tago'));
+  NO_MARKERS(result);
+});
+
+test('translateWithFallback unknown language returns plain text without markers', () => {
+  const result = translateWithFallback('Messaggio di prova', 'pt');
+  assert.strictEqual(result, 'Messaggio di prova');
+  NO_MARKERS(result);
 });
 
 test('executeTranslationPipeline handles normal text with auto random target language', async () => {
