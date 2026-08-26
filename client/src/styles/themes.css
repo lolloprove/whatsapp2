@@ -1,0 +1,118 @@
+:root {
+  /* ===== WhatsApp 2 — Brand tokens derivati dal logo ===== */
+  /* Logo: bolla verde (smeraldo -> verde profondo), monogramma "wa" menta, fondo verde-nero */
+
+  /* Brand */
+  --brand-green: #17b27c;
+  --brand-green-deep: #0b6b4c;
+  --brand-mint: #3ce0a4;
+  --brand-mint-soft: rgba(60, 224, 164, 0.14);
+  --brand-gradient: linear-gradient(145deg, #35d99f 0%, #17b27c 48%, #0b6b4c 100%);
+  --brand-glow: 0 6px 24px rgba(23, 178, 124, 0.4);
+  --tick-read: #6ff2c0;
+
+  /* Superfici (dark, verde-intenso) */
+  --bg-app: #07120d;
+  --bg-mobile-outer: #030906;
+  --bg-sidebar: #0b1a12;
+  --bg-chat-header: #10241a;
+  --bg-chat-body: #08130e;
+  --bg-chat-footer: #10241a;
+
+  --panel-bg: #0b1a12;
+  --panel-header: #10241a;
+  --panel-hover: #153024;
+  --panel-active: #1b3d2c;
+
+  --bottom-sheet-bg: #10241a;
+  --bottom-sheet-drag: #2b4a3a;
+
+  --input-bg: #16291f;
+  --input-border: #24493a;
+  --input-text: #e9f6ef;
+  --input-placeholder: #7fa393;
+
+  /* Bolle */
+  --bubble-out: linear-gradient(150deg, #1cc486 0%, #0e7a54 100%);
+  --bubble-out-text: #f2fff9;
+  --bubble-in: #16291f;
+  --bubble-in-text: #e9f6ef;
+  --bubble-meta: #7fa393;
+  --bubble-meta-out: rgba(230, 255, 244, 0.72);
+
+  /* Alias legacy -> nuovo brand (usati da componenti esistenti) */
+  --wa-green: var(--brand-green);
+  --wa-green-light: var(--brand-mint);
+  --wa-green-hover: #21d593;
+  --wa-green-dark: var(--brand-green-deep);
+
+  --accent-gold: #f2b13c;
+  --accent-blue: var(--brand-mint);
+  --danger-red: #ef5b4d;
+
+  /* Tipografia */
+  --text-primary: #e9f6ef;
+  --text-secondary: #8ba89a;
+  --text-muted: #5f7a6d;
+  --text-link: var(--brand-mint);
+
+  /* Bordi */
+  --border-color: #16301f;
+  --border-light: rgba(139, 190, 165, 0.12);
+
+  /* Ombre */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.62);
+
+  /* Raggi */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+[data-theme="light"] {
+  /* WhatsApp 2 Light — carta menta chiara */
+  --bg-app: #f2f7f4;
+  --bg-mobile-outer: #d8e6de;
+  --bg-sidebar: #ffffff;
+  --bg-chat-header: #ffffff;
+  --bg-chat-body: #e7f1ea;
+  --bg-chat-footer: #f2f7f4;
+
+  --panel-bg: #ffffff;
+  --panel-header: #f2f7f4;
+  --panel-hover: #eef5f0;
+  --panel-active: #dff0e6;
+
+  --bottom-sheet-bg: #ffffff;
+  --bottom-sheet-drag: #cfded5;
+
+  --input-bg: #ffffff;
+  --input-border: #d3e4da;
+  --input-text: #0b1a12;
+  --input-placeholder: #6d8a7c;
+
+  --bubble-out: linear-gradient(150deg, #1cc486 0%, #0e7a54 100%);
+  --bubble-out-text: #f2fff9;
+  --bubble-in: #ffffff;
+  --bubble-in-text: #0b1a12;
+  --bubble-meta: #6d8a7c;
+  --bubble-meta-out: rgba(230, 255, 244, 0.75);
+
+  --wa-green-hover: #11a06f;
+
+  --text-primary: #0b1a12;
+  --text-secondary: #5f7a6d;
+  --text-muted: #8ba89a;
+  --text-link: #0b6b4c;
+
+  --border-color: #dcebe2;
+  --border-light: rgba(11, 26, 18, 0.07);
+
+  --shadow-sm: 0 1px 2px rgba(11, 26, 18, 0.08);
+  --shadow-md: 0 4px 14px rgba(11, 26, 18, 0.1);
+  --shadow-lg: 0 12px 30px rgba(11, 26, 18, 0.16);
+}

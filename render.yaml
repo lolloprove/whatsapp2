@@ -1,0 +1,31 @@
+services:
+  # Backend Web Service (Node.js + Express + Socket.io)
+  - type: web
+    name: whatsapp2-backend
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Render assegna PORT automaticamente; il server legge process.env.PORT
+
+  # Frontend Static Site (React + Vite)
+  # NOTA: VITE_* vengono iniettate a build-time da Vite.
+  - type: web
+    name: whatsapp2-frontend
+    env: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://whatsapp2-backend.onrender.com/api/v1
+      - key: VITE_SOCKET_URL
+        value: https://whatsapp2-backend.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
