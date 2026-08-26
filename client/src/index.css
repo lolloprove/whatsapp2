@@ -65,12 +65,12 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(180, 140, 146, 0.22);
+  background: rgba(160, 168, 162, 0.22);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(180, 140, 146, 0.38);
+  background: rgba(160, 168, 162, 0.38);
 }
 
 /* Wallpaper chat: trama di puntini tinta brand, quasi impercettibile */
@@ -85,7 +85,7 @@ html, body {
 
 [data-theme="light"] .chat-wallpaper {
   opacity: 0.08;
-  background-image: radial-gradient(#8e2434 1px, transparent 1px);
+  background-image: radial-gradient(#0d5c37 1px, transparent 1px);
 }
 
 /* Wordmark */
@@ -96,7 +96,7 @@ html, body {
 }
 
 .wordmark .wordmark-2 {
-  color: var(--brand-mint);
+  color: var(--brand-gold);
 }
 
 /* Common Interactive Controls */

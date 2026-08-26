@@ -3,8 +3,8 @@
   "short_name": "WhatsApp 2",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#140a0d",
-  "theme_color": "#1a0e12",
+  "background_color": "#0b0d0c",
+  "theme_color": "#101413",
   "orientation": "portrait-primary",
   "icons": [
     {

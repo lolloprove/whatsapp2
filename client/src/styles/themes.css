@@ -1,64 +1,65 @@
 :root {
-  /* ===== WhatsApp 2 — Brand tokens derivati dal logo "Onorevole Lisi" ===== */
-  /* Logo: completo bordeaux, cravatta rossa, occhiali crema — pixel art crime comedy */
+  /* ===== WhatsApp 2 — Brand tokens "Onorevole Lisi": nero, verde, oro ===== */
 
   /* Brand */
-  --brand-green: #d93843;
-  --brand-green-deep: #7a1f2d;
-  --brand-mint: #ff6b6e;
-  --brand-mint-soft: rgba(240, 78, 84, 0.16);
-  --brand-gradient: linear-gradient(145deg, #f0565c 0%, #c22f3d 48%, #6e1c2b 100%);
-  --brand-glow: 0 6px 24px rgba(217, 56, 67, 0.4);
-  --tick-read: #f0e6d2;
+  --brand-green: #1fa35c;
+  --brand-green-deep: #0d5c37;
+  --brand-mint: #3ddc84;
+  --brand-mint-soft: rgba(61, 220, 132, 0.14);
+  --brand-gradient: linear-gradient(145deg, #35d07f 0%, #1fa35c 48%, #0d5c37 100%);
+  --brand-glow: 0 6px 24px rgba(31, 163, 92, 0.35);
+  --brand-gold: #d4af37;
+  --gold-glow: 0 6px 24px rgba(212, 175, 55, 0.35);
+  --tick-read: #e6c25a;
 
-  /* Superfici (dark, calde bordeaux) */
-  --bg-app: #140a0d;
-  --bg-mobile-outer: #0a0506;
-  --bg-sidebar: #1a0e12;
-  --bg-chat-header: #241218;
-  --bg-chat-body: #150b0e;
-  --bg-chat-footer: #241218;
+  /* Superfici (nero elegante, neutro caldo) */
+  --bg-app: #0b0d0c;
+  --bg-mobile-outer: #050706;
+  --bg-sidebar: #101413;
+  --bg-chat-header: #161a18;
+  --bg-chat-body: #0c0f0e;
+  --bg-chat-footer: #161a18;
 
-  --panel-bg: #1a0e12;
-  --panel-header: #241218;
-  --panel-hover: #2f1a20;
-  --panel-active: #3d2029;
+  --panel-bg: #101413;
+  --panel-header: #161a18;
+  --panel-hover: #1e2422;
+  --panel-active: #28302c;
 
-  --bottom-sheet-bg: #241218;
-  --bottom-sheet-drag: #4a2b33;
+  --bottom-sheet-bg: #161a18;
+  --bottom-sheet-drag: #3a423e;
 
-  --input-bg: #2a151b;
-  --input-border: #4a2430;
-  --input-text: #f7eded;
-  --input-placeholder: #a98a90;
+  --input-bg: #1a1f1d;
+  --input-border: #2c3531;
+  --input-text: #f2f5f3;
+  --input-placeholder: #8a968f;
 
   /* Bolle */
-  --bubble-out: linear-gradient(150deg, #e0434e 0%, #8e2434 100%);
-  --bubble-out-text: #fff5f5;
-  --bubble-in: #2a151b;
-  --bubble-in-text: #f7eded;
-  --bubble-meta: #a98a90;
-  --bubble-meta-out: rgba(255, 235, 235, 0.72);
+  --bubble-out: linear-gradient(150deg, #22b563 0%, #0d5c37 100%);
+  --bubble-out-text: #f4fff9;
+  --bubble-in: #1a1f1d;
+  --bubble-in-text: #f2f5f3;
+  --bubble-meta: #8a968f;
+  --bubble-meta-out: rgba(240, 255, 248, 0.72);
 
   /* Alias legacy -> nuovo brand (usati da componenti esistenti) */
   --wa-green: var(--brand-green);
   --wa-green-light: var(--brand-mint);
-  --wa-green-hover: #ff8587;
+  --wa-green-hover: #55e697;
   --wa-green-dark: var(--brand-green-deep);
 
-  --accent-gold: #f2b13c;
+  --accent-gold: #d4af37;
   --accent-blue: var(--brand-mint);
-  --danger-red: #ff7a45;
+  --danger-red: #ef5b4d;
 
   /* Tipografia */
-  --text-primary: #f7eded;
-  --text-secondary: #b39aa0;
-  --text-muted: #7d5f66;
+  --text-primary: #f2f5f3;
+  --text-secondary: #a3b0a8;
+  --text-muted: #6e7d73;
   --text-link: var(--brand-mint);
 
   /* Bordi */
-  --border-color: #33161d;
-  --border-light: rgba(240, 160, 165, 0.12);
+  --border-color: #1f2622;
+  --border-light: rgba(190, 230, 205, 0.1);
 
   /* Ombre */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -74,48 +75,48 @@
 }
 
 [data-theme="light"] {
-  /* WhatsApp 2 Light — carta crema calda */
-  --bg-app: #f9f4f4;
-  --bg-mobile-outer: #e8dbdb;
+  /* WhatsApp 2 Light — avorio, verde profondo, oro */
+  --bg-app: #f7f6f2;
+  --bg-mobile-outer: #e5e2d8;
   --bg-sidebar: #ffffff;
   --bg-chat-header: #ffffff;
-  --bg-chat-body: #f3e9e9;
-  --bg-chat-footer: #f9f4f4;
+  --bg-chat-body: #efeee8;
+  --bg-chat-footer: #f7f6f2;
 
   --panel-bg: #ffffff;
-  --panel-header: #f9f4f4;
-  --panel-hover: #f4eaea;
-  --panel-active: #f0dcdc;
+  --panel-header: #f7f6f2;
+  --panel-hover: #f0efe8;
+  --panel-active: #e2efe4;
 
   --bottom-sheet-bg: #ffffff;
-  --bottom-sheet-drag: #dfd0d0;
+  --bottom-sheet-drag: #d8d4c6;
 
   --input-bg: #ffffff;
-  --input-border: #e4d3d3;
-  --input-text: #1a0e12;
-  --input-placeholder: #9c8288;
+  --input-border: #ddd9cc;
+  --input-text: #101413;
+  --input-placeholder: #8d9189;
 
-  --bubble-out: linear-gradient(150deg, #e0434e 0%, #8e2434 100%);
-  --bubble-out-text: #fff5f5;
+  --bubble-out: linear-gradient(150deg, #22b563 0%, #0d5c37 100%);
+  --bubble-out-text: #f4fff9;
   --bubble-in: #ffffff;
-  --bubble-in-text: #1a0e12;
-  --bubble-meta: #9c8288;
-  --bubble-meta-out: rgba(255, 235, 235, 0.75);
+  --bubble-in-text: #101413;
+  --bubble-meta: #8d9189;
+  --bubble-meta-out: rgba(240, 255, 248, 0.75);
 
-  --brand-mint: #c22f3d;
-  --brand-mint-soft: rgba(194, 47, 61, 0.12);
-  --tick-read: #8e2434;
-  --wa-green-hover: #a52633;
+  --brand-mint: #14834a;
+  --brand-mint-soft: rgba(20, 131, 74, 0.12);
+  --tick-read: #a87e1f;
+  --wa-green-hover: #178a4e;
 
-  --text-primary: #1a0e12;
-  --text-secondary: #7d5f66;
-  --text-muted: #a08a8f;
-  --text-link: #b02a36;
+  --text-primary: #101413;
+  --text-secondary: #6e7d73;
+  --text-muted: #9aa59c;
+  --text-link: #0d5c37;
 
-  --border-color: #eadddd;
-  --border-light: rgba(26, 14, 18, 0.07);
+  --border-color: #e6e3d8;
+  --border-light: rgba(16, 20, 19, 0.07);
 
-  --shadow-sm: 0 1px 2px rgba(26, 14, 18, 0.08);
-  --shadow-md: 0 4px 14px rgba(26, 14, 18, 0.1);
-  --shadow-lg: 0 12px 30px rgba(26, 14, 18, 0.16);
+  --shadow-sm: 0 1px 2px rgba(16, 20, 19, 0.08);
+  --shadow-md: 0 4px 14px rgba(16, 20, 19, 0.1);
+  --shadow-lg: 0 12px 30px rgba(16, 20, 19, 0.16);
 }

@@ -71,11 +71,24 @@ export const OnboardingScreen: React.FC = () => {
             color: 'var(--text-secondary)',
             maxWidth: '270px',
             lineHeight: '1.5',
-            marginTop: '10px'
+            marginTop: '10px',
+            marginBottom: 0
           }}
         >
           Un nome. Niente password, niente storie.
         </p>
+        <span
+          style={{
+            fontSize: '12px',
+            fontWeight: 700,
+            letterSpacing: '0.6px',
+            color: 'var(--brand-gold)',
+            marginTop: '8px',
+            textTransform: 'uppercase'
+          }}
+        >
+          — L'Onorevole Lisi
+        </span>
       </div>
 
       {/* Form */}
