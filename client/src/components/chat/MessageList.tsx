@@ -61,7 +61,7 @@ export const MessageList: React.FC<MessageListProps> = ({
             textAlign: 'center'
           }}
         >
-          Nessun messaggio: scrivi il primo!
+          Nessun messaggio. Il primo tocca a te.
         </div>
       ) : (
         messages.map((msg) => (

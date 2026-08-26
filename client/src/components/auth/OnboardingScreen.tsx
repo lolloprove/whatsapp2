@@ -19,7 +19,7 @@ export const OnboardingScreen: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) {
-      setError('Scegli un username di almeno 2 caratteri (lettere, numeri o _).');
+      setError('Questo nome non va bene. Scegline uno più decente.');
       return;
     }
     setError(null);
@@ -28,7 +28,7 @@ export const OnboardingScreen: React.FC = () => {
       await registerUser(cleanUsername);
     } catch (err) {
       console.error(err);
-      setError(err instanceof Error ? err.message : 'Errore durante l’accesso. Riprova.');
+      setError(err instanceof Error ? err.message : 'Non è andata. Riprova.');
     } finally {
       setIsSubmitting(false);
     }
@@ -74,7 +74,7 @@ export const OnboardingScreen: React.FC = () => {
             marginTop: '10px'
           }}
         >
-          Un solo username e sei dentro. Niente numeri, niente password.
+          Un nome. Niente password, niente storie.
         </p>
       </div>
 
@@ -149,7 +149,7 @@ export const OnboardingScreen: React.FC = () => {
               minHeight: '15px'
             }}
           >
-            {error || 'Solo lettere minuscole, numeri e underscore.'}
+            {error || 'Lettere minuscole, numeri, underscore. Basta così.'}
           </div>
         </div>
 
@@ -169,11 +169,11 @@ export const OnboardingScreen: React.FC = () => {
           {isSubmitting ? (
             <>
               <Loader2 size={18} className="animate-spin" />
-              <span>Accesso in corso...</span>
+              <span>Un secondo.</span>
             </>
           ) : (
             <>
-              <span>Inizia a chattare</span>
+              <span>Entra</span>
               <ArrowRight size={18} />
             </>
           )}
@@ -184,7 +184,7 @@ export const OnboardingScreen: React.FC = () => {
       <div style={{ zIndex: 2, display: 'flex', alignItems: 'center', gap: '7px', opacity: 0.75 }}>
         <Logo size={15} style={{ borderRadius: '5px', boxShadow: 'none' }} />
         <span style={{ fontSize: '11.5px', color: 'var(--text-muted)', letterSpacing: '0.2px' }}>
-          WhatsApp 2 — semplice, veloce, tua.
+          Qui dentro si parla chiaro.
         </span>
       </div>
     </div>

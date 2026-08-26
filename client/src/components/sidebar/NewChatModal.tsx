@@ -70,7 +70,7 @@ export const NewChatModal: React.FC<NewChatModalProps> = ({ isOpen, onClose }) =
           <Search size={18} color="var(--text-secondary)" />
           <input
             type="text"
-            placeholder="Cerca per nome o username..."
+            placeholder="Cerca un utente. Il resto viene dopo."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
@@ -103,7 +103,7 @@ export const NewChatModal: React.FC<NewChatModalProps> = ({ isOpen, onClose }) =
             }}
           >
             <Loader2 size={22} className="animate-spin" color="var(--brand-mint)" />
-            <span>Ricerca contatti...</span>
+            <span>Sto cercando.</span>
           </div>
         ) : usersList.length === 0 ? (
           <div
@@ -115,7 +115,7 @@ export const NewChatModal: React.FC<NewChatModalProps> = ({ isOpen, onClose }) =
             }}
           >
             <User size={32} style={{ margin: '0 auto 10px auto', opacity: 0.4 }} />
-            <p>Nessun contatto trovato.</p>
+            <p>Non c’è nessuno con questo nome.</p>
           </div>
         ) : (
           usersList.map((target) => (

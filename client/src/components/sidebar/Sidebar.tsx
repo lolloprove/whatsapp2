@@ -200,8 +200,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onSelectChatMobile }) => {
             </div>
             <p style={{ maxWidth: '250px', lineHeight: '1.45' }}>
               {searchQuery
-                ? 'Nessuna conversazione trovata.'
-                : 'Nessuna chat ancora. Tocca + per iniziare una conversazione.'}
+                ? 'Niente. Prova un altro nome.'
+                : 'Non c’è nessuno qui. Per ora. Tocca + e trova qualcuno.'}
             </p>
           </div>
         ) : (

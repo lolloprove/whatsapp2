@@ -45,7 +45,7 @@ export const EmptyChatState: React.FC<EmptyChatStateProps> = ({ onStartNewChat }
             marginBottom: '22px'
           }}
         >
-          Scegli una chat dalla lista o inizia una nuova conversazione.
+          La chat è vuota. Trova qualcuno e scrivigli.
         </p>
 
         {onStartNewChat && (
